@@ -85,19 +85,19 @@ void* UCISearch(void* arg) {
 
 void BestMove(Board* board, SearchParams* params, ThreadData* threads, SearchResults* results) {
   Move bestMove;
-  if ((bestMove = TBRootProbe(board))) {
-    while (PONDERING)
-      ;
+  // if ((bestMove = TBRootProbe(board))) {
+  //   while (PONDERING)
+  //     ;
 
-    printf("bestmove %s\n", MoveToStr(bestMove, board));
-  }
+  //   printf("bestmove %s\n", MoveToStr(bestMove, board));
+  // }
   //  else if ((bestMove = ProbeNoob(board))) {
   //   while (PONDERING)
   //     ;
 
   //   printf("bestmove %s\n", MoveToStr(bestMove, board));
   // } 
-  else {
+  //else {
     pthread_t pthreads[threads->count];
     InitPool(board, params, threads, results);
 
@@ -122,7 +122,7 @@ void BestMove(Board* board, SearchParams* params, ThreadData* threads, SearchRes
       printf(" ponder %s", MoveToStr(results->ponderMoves[results->depth], board));
 
     printf("\n");
-  }
+  //}
 }
 
 void* Search(void* arg) {
