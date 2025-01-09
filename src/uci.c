@@ -296,11 +296,11 @@ void UCILoop() {
       threads = CreatePool(max(1, min(256, n)));
       printf("info string set Threads to value %d\n", n);
     } else if (!strncmp(in, "setoption name SyzygyPath value ", 32)) {
-      int success = tb_init(in + 32);
-      if (success)
-        printf("info string set SyzygyPath to value %s\n", in + 32);
-      else
-        printf("info string FAILED!\n");
+      //int success = tb_init(in + 32);
+     // if (success)
+      //  printf("info string set SyzygyPath to value %s\n", in + 32);
+     // else
+      //  printf("info string FAILED!\n");
     } else if (!strncmp(in, "setoption name NoobBookLimit value ", 35)) {
       NOOB_DEPTH_LIMIT = min(32, max(0, GetOptionIntValue(in)));
       printf("info string set NoobBookLimit to value %d\n", NOOB_DEPTH_LIMIT);
