@@ -60,12 +60,13 @@ unsigned TBProbe(Board* board) {
 //  if (board->castling || board->halfMove || bits(board->occupancies[BOTH]) > TB_LARGEST)
   //  return TB_RESULT_FAILED;
 
-  return tb_probe_wdl(vf(board->occupancies[WHITE]), vf(board->occupancies[BLACK]),
-                      vf(board->pieces[KING_WHITE] | board->pieces[KING_BLACK]),
-                      vf(board->pieces[QUEEN_WHITE] | board->pieces[QUEEN_BLACK]),
-                      vf(board->pieces[ROOK_WHITE] | board->pieces[ROOK_BLACK]),
-                      vf(board->pieces[BISHOP_WHITE] | board->pieces[BISHOP_BLACK]),
-                      vf(board->pieces[KNIGHT_WHITE] | board->pieces[KNIGHT_BLACK]),
-                      vf(board->pieces[PAWN_WHITE] | board->pieces[PAWN_BLACK]),
-                      board->epSquare ? MIRROR[board->epSquare] : 0, board->side == WHITE ? 1 : 0);
+  // return tb_probe_wdl(vf(board->occupancies[WHITE]), vf(board->occupancies[BLACK]),
+  //                     vf(board->pieces[KING_WHITE] | board->pieces[KING_BLACK]),
+  //                     vf(board->pieces[QUEEN_WHITE] | board->pieces[QUEEN_BLACK]),
+  //                     vf(board->pieces[ROOK_WHITE] | board->pieces[ROOK_BLACK]),
+  //                     vf(board->pieces[BISHOP_WHITE] | board->pieces[BISHOP_BLACK]),
+  //                     vf(board->pieces[KNIGHT_WHITE] | board->pieces[KNIGHT_BLACK]),
+  //                     vf(board->pieces[PAWN_WHITE] | board->pieces[PAWN_BLACK]),
+  //                     board->epSquare ? MIRROR[board->epSquare] : 0, board->side == WHITE ? 1 : 0);
+  return 0;
 }
