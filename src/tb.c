@@ -26,10 +26,11 @@
 #define vf(bb) __builtin_bswap64((bb))
 
 Move TBRootProbe(Board* board) {
-  if (board->castling || bits(board->occupancies[BOTH]) > TB_LARGEST)
-    return NULL_MOVE;
+//  if (board->castling || bits(board->occupancies[BOTH]) > TB_LARGEST)
+  //  return NULL_MOVE;
 
   unsigned results[MAX_MOVES]; // used for native support
+  /*
   unsigned res = tb_probe_root(vf(board->occupancies[WHITE]), vf(board->occupancies[BLACK]),
                                vf(board->pieces[KING_WHITE] | board->pieces[KING_BLACK]),
                                vf(board->pieces[QUEEN_WHITE] | board->pieces[QUEEN_BLACK]),
@@ -38,7 +39,7 @@ Move TBRootProbe(Board* board) {
                                vf(board->pieces[KNIGHT_WHITE] | board->pieces[KNIGHT_BLACK]),
                                vf(board->pieces[PAWN_WHITE] | board->pieces[PAWN_BLACK]), board->halfMove,
                                board->epSquare ? MIRROR[board->epSquare] : 0, board->side == WHITE ? 1 : 0, results);
-
+  */
   if (res == TB_RESULT_FAILED || res == TB_RESULT_STALEMATE || res == TB_RESULT_CHECKMATE)
     return NULL_MOVE;
 
@@ -56,8 +57,8 @@ Move TBRootProbe(Board* board) {
 }
 
 unsigned TBProbe(Board* board) {
-  if (board->castling || board->halfMove || bits(board->occupancies[BOTH]) > TB_LARGEST)
-    return TB_RESULT_FAILED;
+//  if (board->castling || board->halfMove || bits(board->occupancies[BOTH]) > TB_LARGEST)
+  //  return TB_RESULT_FAILED;
 
   return tb_probe_wdl(vf(board->occupancies[WHITE]), vf(board->occupancies[BLACK]),
                       vf(board->pieces[KING_WHITE] | board->pieces[KING_BLACK]),
