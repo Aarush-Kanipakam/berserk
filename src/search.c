@@ -90,12 +90,14 @@ void BestMove(Board* board, SearchParams* params, ThreadData* threads, SearchRes
       ;
 
     printf("bestmove %s\n", MoveToStr(bestMove, board));
-  } else if ((bestMove = ProbeNoob(board))) {
-    while (PONDERING)
-      ;
+  }
+  //  else if ((bestMove = ProbeNoob(board))) {
+  //   while (PONDERING)
+  //     ;
 
-    printf("bestmove %s\n", MoveToStr(bestMove, board));
-  } else {
+  //   printf("bestmove %s\n", MoveToStr(bestMove, board));
+  // } 
+  else {
     pthread_t pthreads[threads->count];
     InitPool(board, params, threads, results);
 
