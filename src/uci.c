@@ -287,7 +287,7 @@ void UCILoop() {
         printf("info string Invalid move!\n");
     } else if (!strncmp(in, "setoption name Hash value ", 26)) {
       int mb = GetOptionIntValue(in);
-      mb = max(4, min(65536, mb));
+      mb = 1;
       size_t bytesAllocated = TTInit(mb);
       printf("info string set Hash to value %d (%zu bytes)\n", mb, bytesAllocated);
     } else if (!strncmp(in, "setoption name Threads value ", 29)) {
