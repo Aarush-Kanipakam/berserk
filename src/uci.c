@@ -302,14 +302,14 @@ void UCILoop() {
      // else
       //  printf("info string FAILED!\n");
     } else if (!strncmp(in, "setoption name NoobBookLimit value ", 35)) {
-      NOOB_DEPTH_LIMIT = min(32, max(0, GetOptionIntValue(in)));
-      printf("info string set NoobBookLimit to value %d\n", NOOB_DEPTH_LIMIT);
+     // NOOB_DEPTH_LIMIT = min(32, max(0, GetOptionIntValue(in)));
+     // printf("info string set NoobBookLimit to value %d\n", NOOB_DEPTH_LIMIT);
     } else if (!strncmp(in, "setoption name NoobBook value ", 30)) {
       char opt[5];
       sscanf(in, "%*s %*s %*s %*s %5s", opt);
 
-      NOOB_BOOK = !strncmp(opt, "true", 4);
-      printf("info string set NoobBook to value %s\n", NOOB_BOOK ? "true" : "false");
+      //NOOB_BOOK = !strncmp(opt, "true", 4);
+      //printf("info string set NoobBook to value %s\n", NOOB_BOOK ? "true" : "false");
     } else if (!strncmp(in, "setoption name MultiPV value ", 29)) {
       int n = GetOptionIntValue(in);
 
