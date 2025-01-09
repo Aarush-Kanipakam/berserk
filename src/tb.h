@@ -19,7 +19,7 @@
 
 #include "types.h"
 
-Move TBRootProbe(Board* board);
-unsigned TBProbe(Board* board);
+//Move TBRootProbe(Board* board);
+//unsigned TBProbe(Board* board);
 
 #endif
