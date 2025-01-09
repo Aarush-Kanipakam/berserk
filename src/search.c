@@ -329,8 +329,8 @@ int Negamax(int alpha, int beta, int depth, ThreadData* thread, PV* pv) {
 
   // tablebase - we do not do this at root
   if (!isRoot) {
-   unsigned tbResult = TBProbe(board);
-
+   //unsigned tbResult = TBProbe(board);
+   unsigned tbResult = TB_RESULT_FAILED;  // Stubbing TBProbe behavior
     if (tbResult != TB_RESULT_FAILED) {
       data->tbhits++;
 
