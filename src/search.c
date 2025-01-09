@@ -329,26 +329,26 @@ int Negamax(int alpha, int beta, int depth, ThreadData* thread, PV* pv) {
 
   // tablebase - we do not do this at root
   if (!isRoot) {
-   // unsigned tbResult = TBProbe(board);
+   unsigned tbResult = TBProbe(board);
 
-    // if (tbResult != TB_RESULT_FAILED) {
-    //   data->tbhits++;
+    if (tbResult != TB_RESULT_FAILED) {
+      data->tbhits++;
 
-    //   int flag;
-    //   switch (tbResult) {
-    //   case TB_WIN:
-    //     score = TB_WIN_BOUND - data->ply;
-    //     flag = TT_LOWER;
-    //     break;
-    //   case TB_LOSS:
-    //     score = -TB_WIN_BOUND + data->ply;
-    //     flag = TT_UPPER;
-    //     break;
-    //   default:
-    //     score = 0;
-    //     flag = TT_EXACT;
-    //     break;
-    //   }
+      int flag;
+      switch (tbResult) {
+      case TB_WIN:
+        score = TB_WIN_BOUND - data->ply;
+        flag = TT_LOWER;
+        break;
+      case TB_LOSS:
+        score = -TB_WIN_BOUND + data->ply;
+        flag = TT_UPPER;
+        break;
+      default:
+        score = 0;
+        flag = TT_EXACT;
+        break;
+      }
 
       // if the tablebase gives us what we want, then we accept it's score and return
       if ((flag & TT_EXACT) || ((flag & TT_LOWER) && score >= beta) || ((flag & TT_UPPER) && score <= alpha)) {
