@@ -40,13 +40,13 @@ Move TBRootProbe(Board* board) {
                                vf(board->pieces[PAWN_WHITE] | board->pieces[PAWN_BLACK]), board->halfMove,
                                board->epSquare ? MIRROR[board->epSquare] : 0, board->side == WHITE ? 1 : 0, results);
   */
-  if (res == TB_RESULT_FAILED || res == TB_RESULT_STALEMATE || res == TB_RESULT_CHECKMATE)
-    return NULL_MOVE;
+  // if (res == TB_RESULT_FAILED || res == TB_RESULT_STALEMATE || res == TB_RESULT_CHECKMATE)
+  //   return NULL_MOVE;
 
-  unsigned start = MIRROR[TB_GET_FROM(res)];
-  unsigned end = MIRROR[TB_GET_TO(res)];
-  unsigned ep = TB_GET_EP(res);
-  unsigned promo = TB_GET_PROMOTES(res);
+  // unsigned start = MIRROR[TB_GET_FROM(res)];
+  // unsigned end = MIRROR[TB_GET_TO(res)];
+  // unsigned ep = TB_GET_EP(res);
+  // unsigned promo = TB_GET_PROMOTES(res);
   int piece = board->squares[start];
   int capture = !!board->squares[end];
 
