@@ -101,7 +101,7 @@ void Bench() {
     InitPool(&board, &params, threads, &results);
 
     params.start = GetTimeMS();
-    BestMove(&board, &params, threads, &results);
+    //BestMove(&board, &params, threads, &results);
     times[i] = GetTimeMS() - params.start;
 
     bestMoves[i] = results.bestMoves[results.depth];
