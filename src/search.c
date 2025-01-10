@@ -83,93 +83,48 @@ void* UCISearch(void* arg) {
   return NULL;
 }
 
-// void BestMove(Board* board, SearchParams* params, ThreadData* threads, SearchResults* results) {
-//   Move bestMove;
-//   // if ((bestMove = TBRootProbe(board))) {
-//   //   while (PONDERING)
-//   //     ;
-
-//   //   printf("bestmove %s\n", MoveToStr(bestMove, board));
-//   // }
-//   //  else if ((bestMove = ProbeNoob(board))) {
-//   //   while (PONDERING)
-//   //     ;
-
-//   //   printf("bestmove %s\n", MoveToStr(bestMove, board));
-//   // } 
-//   //else {
-//     pthread_t pthreads[threads->count];
-//     InitPool(board, params, threads, results);
-
-//     params->stopped = 0;
-//     TTUpdate();
-
-//     // start at 1, we will resuse main-thread
-//     for (int i = 1; i < threads->count; i++)
-//       pthread_create(&pthreads[i], NULL, &Search, &threads[i]);
-//     Search(&threads[0]);
-
-//     // if main thread stopped, then stop all and wait till complete
-//     params->stopped = 1;
-//     for (int i = 1; i < threads->count; i++)
-//       pthread_join(pthreads[i], NULL);
-
-//     while (PONDERING)
-//       ;
-
-//     printf("bestmove %s", MoveToStr(results->bestMoves[results->depth], board));
-//     if (results->ponderMoves[results->depth])
-//       printf(" ponder %s", MoveToStr(results->ponderMoves[results->depth], board));
-
-//     printf("\n");
-//   //}
-// }
 void BestMove(Board* board, SearchParams* params, ThreadData* threads, SearchResults* results) {
-    Move bestMove = NULL_MOVE;
+  Move bestMove;
+  // if ((bestMove = TBRootProbe(board))) {
+  //   while (PONDERING)
+  //     ;
 
-    // Initialize thread pool
+  //   printf("bestmove %s\n", MoveToStr(bestMove, board));
+  // }
+  //  else if ((bestMove = ProbeNoob(board))) {
+  //   while (PONDERING)
+  //     ;
+
+  //   printf("bestmove %s\n", MoveToStr(bestMove, board));
+  // } 
+  //else {
     pthread_t pthreads[threads->count];
     InitPool(board, params, threads, results);
 
     params->stopped = 0;
     TTUpdate();
 
-    // Start threads (excluding the main thread)
-    for (int i = 1; i < threads->count; i++) {
-        if (pthread_create(&pthreads[i], NULL, &Search, &threads[i]) != 0) {
-            fprintf(stderr, "Error creating thread %d\n", i);
-            params->stopped = 1;
-            return;
-        }
-    }
-
-    // Main thread participates in the search
+    // start at 1, we will resuse main-thread
+    for (int i = 1; i < threads->count; i++)
+      pthread_create(&pthreads[i], NULL, &Search, &threads[i]);
     Search(&threads[0]);
 
-    // Stop all threads and wait for completion
+    // if main thread stopped, then stop all and wait till complete
     params->stopped = 1;
-    for (int i = 1; i < threads->count; i++) {
-        pthread_join(pthreads[i], NULL);
-    }
+    for (int i = 1; i < threads->count; i++)
+      pthread_join(pthreads[i], NULL);
 
-    // Get the best move and ponder move
-    bestMove = results->bestMoves[results->depth];
-    Move ponderMove = results->ponderMoves[results->depth];
-
-    // Fallback logic if no valid move is found
-    if (bestMove == NULL_MOVE) {
-        bestMove = GenerateRandomMove(board);  // Use a simple fallback generator
-    }
-
-    // Output the result
     while (PONDERING)
-        ;
+      ;
 
-    printf("bestmove %s", MoveToStr(bestMove, board));
-    if (ponderMove)
-        printf(" ponder %s", MoveToStr(ponderMove, board));
+    printf("bestmove %s", MoveToStr(results->bestMoves[results->depth], board));
+    if (results->ponderMoves[results->depth])
+      printf(" ponder %s", MoveToStr(results->ponderMoves[results->depth], board));
+
     printf("\n");
+  //}
 }
+
 
 void* Search(void* arg) {
   ThreadData* thread = (ThreadData*)arg;
